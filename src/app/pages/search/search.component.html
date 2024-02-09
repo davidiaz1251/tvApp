@@ -1,0 +1,29 @@
+<div class="container mt-4">
+	<div class="row">
+		<div class="col">
+			<h2>Search: {{ query }}</h2>
+		</div>
+		<div class="col text-end">
+			<button type="button" class="btn btn-outline-light px-4" routerLink="/home">
+				Regresar
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 mb-5">
+			<input 
+			class="form-control mt-3" 
+			[value]="query" 
+			placeholder="Search TV Show"
+			type="search"
+			(keydown.enter)="searchTvShow($event)"
+			>
+		</div>
+		<div class="col mb-4 d-flex justify-content-center" *ngFor="let item of result">
+			<div class="card" style="width: 18rem;" (click)="view(item)">
+				<img [src]="tvService.urlimg + item.poster_path" class="card-img-top" [alt]="item.name">
+			</div>
+		</div>
+	</div>
+</div>
+

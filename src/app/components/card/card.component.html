@@ -1,0 +1,7 @@
+<swiper-container fmSwiper [config]="config" speed="500" autoplay="true">
+	<swiper-slide *ngFor="let item of tvList" (click)="view(item)">
+		<div class="card">
+			<img [src]="tvService.urlimg + item.poster_path" class="card-img-top" [alt]="item.name">
+		</div>
+	</swiper-slide>
+</swiper-container>

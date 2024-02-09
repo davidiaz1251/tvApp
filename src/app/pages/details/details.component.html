@@ -1,0 +1,47 @@
+<div class="container">
+	<div class="row" *ngIf="result.name != undefined">
+		<div class="col-12 col-sm-12 col-md-4 py-4 d-flex justify-content-center">
+			<img [src]="tvService.urlimg + result.poster_path " class="img-fluid" [alt]="result.name">
+		</div>
+		<div class="col-12 col-sm-12 col-md-8 py-4">
+			<h1>{{ result.name }} ({{result.first_air_date}})</h1>
+			<span *ngFor="let gen of result.genres"><strong> - {{gen.name}}</strong></span>
+			<p class="mt-3"><strong>Vista General</strong></p>
+			<p class="mt-2">{{ result.overview }}</p>
+			<ngb-rating [rate]="result.vote_average"></ngb-rating>
+			<p>Rating: <strong>{{ result.vote_average }}</strong></p>
+			<p>Vote: <strong>{{ result.vote_count }}</strong></p>
+			<p>Number seasons: <strong>{{ result.number_of_seasons }}</strong></p>
+			<p>Number episodes: <strong>{{ result.number_of_episodes }}</strong></p>
+			<a [href]="result.homepage" target="_blank"><strong>Home Page</strong></a>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12 text-center">
+			<button type="button" class="btn btn-outline-light" (click)="goBack()">
+				Regresar
+			</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-12">
+			<h2 class="mb-4">Seasons</h2>
+			<select class="form-select-sm mb-4" aria-label="Default select example" (input)="searchEpisodes($event)">
+				<option selected>Select Season</option>
+				<option *ngFor="let season of result.seasons">{{ season.season_number }}</option>
+			</select>
+			<div class="row">
+				<div class="col-12 col-sm-12 col-md-3 mb-5 d-flex justify-content-center"
+					*ngFor="let episode of episodes.episodes">
+					<div class="card" style="width: 18rem;">
+						<img *ngIf="episode.still_path" [src]="tvService.urlimg + episode.still_path" class="card-img-top" [alt]="episode.name">
+						<div class="card-body">
+							<h5 class="card-title">{{ episode.name}}</h5>
+							<p class="card-text">{{ episode.overview.slice(0, 100)}}...</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
